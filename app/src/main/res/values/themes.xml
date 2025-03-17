@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.SwoopixApp" parent="Theme.Material3.DayNight.NoActionBar">
@@ -6,4 +7,65 @@
     </style>
 
     <style name="Theme.SwoopixApp" parent="Base.Theme.SwoopixApp" />
+
+    <style name="Theme.Swoopix" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_dark</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        
+        <!-- Text appearances -->
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Swoopix.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Swoopix.HeadlineMedium</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.Swoopix.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.Swoopix.BodyMedium</item>
+        
+        <!-- Shape appearances -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Swoopix.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Swoopix.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Swoopix.LargeComponent</item>
+    </style>
+
+    <!-- Text Styles -->
+    <style name="TextAppearance.Swoopix.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.Swoopix.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.Swoopix.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.Swoopix.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Shape Styles -->
+    <style name="ShapeAppearance.Swoopix.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.Swoopix.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="ShapeAppearance.Swoopix.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerSize">12dp</item>
+    </style>
 </resources>
