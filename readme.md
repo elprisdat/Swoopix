@@ -1,6 +1,76 @@
 # Swoopix App
 
-Aplikasi Swoopix adalah platform digital yang memungkinkan pengguna untuk [deskripsi singkat aplikasi].
+Swoopix adalah aplikasi mobile berbasis Android yang menyediakan platform digital untuk layanan jasa. Aplikasi ini dibangun menggunakan Android Native dengan Java dan mengimplementasikan desain modern yang fokus pada pengalaman pengguna.
+
+## 🛠️ Persyaratan Sistem
+- Android Studio Hedgehog atau yang lebih baru
+- JDK 17 atau yang lebih baru
+- Android SDK minimal API 24 (Android 7.0)
+- Gradle 8.2 atau yang lebih baru
+
+## 📱 Fitur Utama
+- Autentikasi pengguna (Login/Register)
+- Dashboard interaktif
+- Sistem notifikasi
+- Manajemen profil
+- Sistem pemesanan
+- Dan fitur-fitur lainnya
+
+## ⚙️ Cara Instalasi
+
+### Untuk Pengguna
+1. Download APK dari [Release Page](https://github.com/elprisdat/Swoopix/releases)
+2. Izinkan instalasi dari sumber tidak dikenal di pengaturan Android Anda
+3. Install APK dan jalankan aplikasi
+
+### Untuk Developer
+1. Clone repository
+   ```bash
+   git clone https://github.com/elprisdat/Swoopix.git
+   cd Swoopix
+   ```
+
+2. Buka dengan Android Studio
+   - Buka Android Studio
+   - Pilih "Open an Existing Project"
+   - Navigasi ke folder Swoopix
+   - Klik "OK"
+
+3. Setup Gradle
+   - Tunggu proses sync Gradle selesai
+   - Jika ada error, pastikan:
+     - Android Studio sudah diupdate
+     - SDK Tools sudah terinstall
+     - Gradle version sesuai
+
+4. Jalankan Aplikasi
+   - Pilih device/emulator
+   - Klik tombol "Run" (⟩) atau tekan Shift + F10
+
+## 🎨 Panduan UI/UX
+
+### Tema Warna
+```xml
+Primary: #2196F3
+Secondary: #FFC107
+Background: #FFFFFF
+Text Primary: #212121
+Text Secondary: #757575
+```
+
+### Tipografi
+- Font Family: Roboto
+- Ukuran Text:
+  - Heading: 24sp
+  - Subheading: 18sp
+  - Body: 16sp
+  - Caption: 14sp
+
+### Layout Guidelines
+- Padding standar: 16dp
+- Margin antar elemen: 8dp
+- Corner radius: 8dp
+- Elevation: 2dp - 8dp
 
 ## Cara Berkontribusi ke Repository Swoopix
 
