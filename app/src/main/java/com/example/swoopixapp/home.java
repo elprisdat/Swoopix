@@ -135,14 +135,14 @@ public class home extends Fragment {
         
         // Inisialisasi promo carousel
         promoViewPager = rootView.findViewById(R.id.promo_viewpager);
-        promoTabLayout = rootView.findViewById(R.id.promo_tab_layout);
+        promoTabLayout = rootView.findViewById(R.id.promo_indicator);
         seeAllPromo = rootView.findViewById(R.id.see_all_promo);
         
         // Inisialisasi widget cuaca
         weatherWidget = rootView.findViewById(R.id.weather_widget);
         weatherTemp = rootView.findViewById(R.id.weather_temperature);
-        weatherDesc = rootView.findViewById(R.id.weather_description);
-        weatherLocation = rootView.findViewById(R.id.weather_location);
+        weatherDesc = rootView.findViewById(R.id.weather_condition);
+        weatherLocation = rootView.findViewById(R.id.weather_title);
         weatherRecommendation = rootView.findViewById(R.id.weather_recommendation);
         weatherIcon = rootView.findViewById(R.id.weather_icon);
         

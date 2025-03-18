@@ -4,169 +4,143 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
-
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
+    private final Context context;
+    private final List<CartItem> cartItems;
+    private final CartItemListener listener;
+    private int lastPosition = -1;
 
-    private Context context;
-    private List<CartItem> cartItems;
-    private CartItemListener listener;
-
-    public interface CartItemListener {
-        void onQuantityChanged(int position, int newQuantity);
-        void onItemRemoved(int position);
-    }
-
-    public CartAdapter(Context context, CartItemListener listener) {
+    public CartAdapter(Context context, List<CartItem> cartItems, CartItemListener listener) {
         this.context = context;
-        this.cartItems = new ArrayList<>();
-        this.listener = listener;
-    }
-
-    public void setCartItems(List<CartItem> cartItems) {
         this.cartItems = cartItems;
-        notifyDataSetChanged();
-    }
-
-    public List<CartItem> getCartItems() {
-        return cartItems;
-    }
-
-    public void addItem(CartItem item) {
-        // Periksa apakah item sudah ada di keranjang
-        for (int i = 0; i < cartItems.size(); i++) {
-            CartItem existingItem = cartItems.get(i);
-            if (existingItem.getId() == item.getId()) {
-                // Jika item sudah ada, tambahkan quantity
-                existingItem.setQuantity(existingItem.getQuantity() + 1);
-                notifyItemChanged(i);
-                return;
-            }
-        }
-        
-        // Jika item belum ada, tambahkan ke keranjang
-        cartItems.add(item);
-        notifyItemInserted(cartItems.size() - 1);
-    }
-
-    public void removeItem(int position) {
-        if (position >= 0 && position < cartItems.size()) {
-            cartItems.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, cartItems.size());
-        }
-    }
-
-    public int getItemCount() {
-        return cartItems.size();
-    }
-
-    public double getSubtotal() {
-        double subtotal = 0;
-        for (CartItem item : cartItems) {
-            subtotal += item.getPrice() * item.getQuantity();
-        }
-        return subtotal;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_cart, parent, false);
-        return new CartViewHolder(view);
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_cart, parent, false);
+        return new CartViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         CartItem item = cartItems.get(position);
         
-        // Set data ke view
+        // Set data
         holder.nameTextView.setText(item.getName());
-        holder.priceTextView.setText(formatRupiah(item.getPrice()));
+        holder.priceTextView.setText(formatRupiah(item.getTotalPrice()));
         holder.quantityTextView.setText(String.valueOf(item.getQuantity()));
+        holder.variantTextView.setText(item.getSize() + ", " + item.getSugar());
+        holder.itemImageView.setImageResource(item.getImageResource());
         
-        // Set gambar item 
-        if (item.getImageResourceId() != 0) {
-            holder.itemImageView.setImageResource(item.getImageResourceId());
-        }
-        
-        // Set subtotal item
-        double itemSubtotal = item.getPrice() * item.getQuantity();
-        holder.subtotalTextView.setText(formatRupiah(itemSubtotal));
-        
-        // Set listener untuk tombol tambah
-        holder.increaseButton.setOnClickListener(v -> {
+        // Pasang event listener
+        holder.plusButton.setOnClickListener(v -> {
             int newQuantity = item.getQuantity() + 1;
             item.setQuantity(newQuantity);
             holder.quantityTextView.setText(String.valueOf(newQuantity));
-            holder.subtotalTextView.setText(formatRupiah(item.getPrice() * newQuantity));
+            holder.priceTextView.setText(formatRupiah(item.getTotalPrice()));
+            
             if (listener != null) {
-                listener.onQuantityChanged(position, newQuantity);
+                listener.onQuantityChanged(holder.getAdapterPosition(), newQuantity);
             }
         });
         
-        // Set listener untuk tombol kurang
-        holder.decreaseButton.setOnClickListener(v -> {
-            if (item.getQuantity() > 1) {
-                int newQuantity = item.getQuantity() - 1;
+        holder.minusButton.setOnClickListener(v -> {
+            int currentQuantity = item.getQuantity();
+            if (currentQuantity > 1) {
+                int newQuantity = currentQuantity - 1;
                 item.setQuantity(newQuantity);
                 holder.quantityTextView.setText(String.valueOf(newQuantity));
-                holder.subtotalTextView.setText(formatRupiah(item.getPrice() * newQuantity));
+                holder.priceTextView.setText(formatRupiah(item.getTotalPrice()));
+                
                 if (listener != null) {
-                    listener.onQuantityChanged(position, newQuantity);
+                    listener.onQuantityChanged(holder.getAdapterPosition(), newQuantity);
                 }
             } else {
-                // Hapus item jika quantity menjadi 0
+                // Jika quantity = 1 dan tombol minus ditekan, hapus item
                 if (listener != null) {
-                    listener.onItemRemoved(position);
+                    listener.onItemRemoved(holder.getAdapterPosition());
                 }
             }
         });
         
-        // Set listener untuk tombol hapus
         holder.removeButton.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onItemRemoved(position);
+                listener.onItemRemoved(holder.getAdapterPosition());
             }
         });
+        
+        // Animasi item saat muncul
+        setAnimation(holder.itemView, position);
+    }
+    
+    /**
+     * Animasi slide in dari kanan untuk item
+     */
+    private void setAnimation(View viewToAnimate, int position) {
+        if (position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+            animation.setDuration(350);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 
+    @Override
+    public int getItemCount() {
+        return cartItems.size();
+    }
+    
+    /**
+     * Format angka ke format Rupiah
+     */
     private String formatRupiah(double price) {
-        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(new Locale("in", "ID"));
-        return formatRupiah.format(price);
+        NumberFormat rupiahFormat = NumberFormat.getNumberInstance(new Locale("id", "ID"));
+        return "Rp " + rupiahFormat.format(price);
     }
 
-    static class CartViewHolder extends RecyclerView.ViewHolder {
-        ImageView itemImageView;
-        TextView nameTextView;
-        TextView priceTextView;
-        TextView quantityTextView;
-        TextView subtotalTextView;
-        MaterialButton increaseButton;
-        MaterialButton decreaseButton;
-        ImageView removeButton;
+    // ViewHolder untuk cart item
+    public static class CartViewHolder extends RecyclerView.ViewHolder {
+        final TextView nameTextView;
+        final TextView priceTextView;
+        final TextView quantityTextView;
+        final TextView variantTextView;
+        final ImageView itemImageView;
+        final ImageButton plusButton;
+        final ImageButton minusButton;
+        final ImageButton removeButton;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemImageView = itemView.findViewById(R.id.item_image);
             nameTextView = itemView.findViewById(R.id.item_name);
             priceTextView = itemView.findViewById(R.id.item_price);
             quantityTextView = itemView.findViewById(R.id.quantity_text);
-            subtotalTextView = itemView.findViewById(R.id.item_subtotal);
-            increaseButton = itemView.findViewById(R.id.increase_button);
-            decreaseButton = itemView.findViewById(R.id.decrease_button);
-            removeButton = itemView.findViewById(R.id.remove_button);
+            variantTextView = itemView.findViewById(R.id.item_variant);
+            itemImageView = itemView.findViewById(R.id.item_image);
+            plusButton = itemView.findViewById(R.id.btn_increase);
+            minusButton = itemView.findViewById(R.id.btn_decrease);
+            removeButton = itemView.findViewById(R.id.delete_button);
         }
+    }
+
+    // Interface untuk callback
+    public interface CartItemListener {
+        void onQuantityChanged(int position, int newQuantity);
+        void onItemRemoved(int position);
     }
 } 

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Skema Warna Hitam-Putih -->
-    <color name="primary">#000000</color>
-    <color name="primary_dark">#000000</color>
-    <color name="primary_light">#212121</color>
+    <!-- Skema Warna Teal-Putih -->
+    <color name="primary">#003B40</color>
+    <color name="primary_dark">#002B30</color>
+    <color name="primary_light">#004B50</color>
     <color name="secondary">#FFFFFF</color>
     <color name="secondary_light">#FFFFFF</color>
     <color name="secondary_dark">#F5F5F5</color>
     
     <!-- Header/App Bar Colors -->
-    <color name="header_background">#000000</color>
+    <color name="header_background">#003B40</color>
     <color name="header_text">#FFFFFF</color>
     
     <!-- Text Colors -->
-    <color name="text_primary">#000000</color>
-    <color name="text_secondary">#212121</color>
-    <color name="text_hint">#757575</color>
-    <color name="text_active">#000000</color>
+    <color name="text_primary">#003B40</color>
+    <color name="text_secondary">#006670</color>
+    <color name="text_hint">#80003B40</color>
+    <color name="text_active">#003B40</color>
 
     <!-- Background Colors -->
     <color name="background">#FFFFFF</color>
@@ -41,8 +41,12 @@
     <color name="warning">#F1C40F</color>
     <color name="info">#3498DB</color>
     
+    <!-- Accent Colors -->
+    <color name="gold">#FFD700</color>
+    <color name="teal_accent">#00BCD4</color>
+    
     <!-- Legacy Coffee Colors (keeping for reference but not using) -->
-    <color name="coffee_dark">#4B3621</color>
-    <color name="coffee_medium">#835C3B</color>
-    <color name="coffee_light">#A67B5B</color>
+    <color name="coffee_dark">#003B40</color>
+    <color name="coffee_medium">#005F66</color>
+    <color name="coffee_light">#008891</color>
 </resources>

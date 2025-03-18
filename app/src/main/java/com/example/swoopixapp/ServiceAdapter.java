@@ -24,14 +24,14 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ViewHold
     private final List<String> priceList;
     private final Context context;
     
-    // Black & White theme colors
+    // Teal & White theme colors
     private final int[] CARD_COLORS = new int[]{
-            Color.parseColor("#000000"), // Black
-            Color.parseColor("#212121"), // Dark Gray
-            Color.parseColor("#424242"), // Medium Gray
-            Color.parseColor("#616161"), // Light Gray
-            Color.parseColor("#000000"), // Black
-            Color.parseColor("#212121")  // Dark Gray
+            Color.parseColor("#003B40"), // Teal Primary
+            Color.parseColor("#004B50"), // Teal Light
+            Color.parseColor("#005F66"), // Teal Medium
+            Color.parseColor("#006E76"), // Teal Dark
+            Color.parseColor("#008891"), // Teal Accent
+            Color.parseColor("#009DAA")  // Teal Bright
     };
 
     public ServiceAdapter(Context context, List<String> menuList, List<Integer> imageList, List<String> priceList) {

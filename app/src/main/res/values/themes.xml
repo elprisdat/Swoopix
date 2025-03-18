@@ -6,7 +6,28 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.SwoopixApp" parent="Base.Theme.SwoopixApp" />
+    <style name="Theme.SwoopixApp" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/primary</item>
+        <item name="colorSecondaryVariant">@color/primary_light</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <!-- Text colors -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <!-- Background colors -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <!-- Component customization -->
+        <item name="materialButtonStyle">@style/TealButtonStyle</item>
+        <item name="textInputStyle">@style/TealTextInputStyle</item>
+        <item name="chipStyle">@style/ChipTealStyle</item>
+    </style>
 
     <style name="Theme.Swoopix" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color -->
@@ -63,5 +84,20 @@
 
     <style name="ShapeAppearance.Swoopix.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
         <item name="cornerSize">12dp</item>
+    </style>
+
+    <!-- Custom button style -->
+    <style name="TealButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">8dp</item>
+    </style>
+    
+    <!-- Custom text input style -->
+    <style name="TealTextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/primary</item>
+        <item name="hintTextColor">@color/primary</item>
+        <item name="errorTextColor">@color/error</item>
+        <item name="endIconTint">@color/primary</item>
     </style>
 </resources>
