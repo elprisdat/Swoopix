@@ -17,7 +17,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.CompositePageTransformer;
+import androidx.viewpager2.widget.MarginPageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,6 +48,11 @@ public class home extends Fragment {
     private EditText searchEditText;
     private MaterialCardView searchBar;
     private ImageView searchIcon;
+    
+    // Promo carousel
+    private ViewPager2 promoViewPager;
+    private TabLayout promoTabLayout;
+    private TextView seeAllPromo;
     
     // Weather widget
     private ConstraintLayout weatherWidget;
@@ -99,6 +110,9 @@ public class home extends Fragment {
             // Setup fitur pencarian
             setupSearch();
             
+            // Setup promo carousel
+            setupPromoCarousel();
+            
             // Ambil data cuaca
             fetchWeatherData();
             
@@ -118,6 +132,11 @@ public class home extends Fragment {
         searchBar = rootView.findViewById(R.id.search_bar);
         searchIcon = rootView.findViewById(R.id.search_icon);
         searchEditText = rootView.findViewById(R.id.search_input);
+        
+        // Inisialisasi promo carousel
+        promoViewPager = rootView.findViewById(R.id.promo_viewpager);
+        promoTabLayout = rootView.findViewById(R.id.promo_tab_layout);
+        seeAllPromo = rootView.findViewById(R.id.see_all_promo);
         
         // Inisialisasi widget cuaca
         weatherWidget = rootView.findViewById(R.id.weather_widget);
@@ -151,6 +170,62 @@ public class home extends Fragment {
         }
         
         greetingText.setText(greeting);
+    }
+    
+    private void setupPromoCarousel() {
+        // Buat list promo item
+        List<PromoAdapter.PromoItem> promoItems = new ArrayList<>();
+        
+        // Tambahkan promo
+        promoItems.add(new PromoAdapter.PromoItem(
+                "Buy 1 Get 1 Free",
+                "Setiap pembelian kopi ukuran Grande, dapatkan 1 minuman gratis!",
+                "31 Desember 2023",
+                R.drawable.ic_coffee_cup,
+                true)); // true = badge "BARU" ditampilkan
+                
+        promoItems.add(new PromoAdapter.PromoItem(
+                "Diskon 50%",
+                "Diskon 50% untuk semua minuman Frappuccino setiap hari Jumat",
+                "31 Januari 2024",
+                R.drawable.ic_frappuccino,
+                false));
+                
+        promoItems.add(new PromoAdapter.PromoItem(
+                "Paket Spesial",
+                "Beli 2 minuman dan 1 pastry, diskon Rp 25.000",
+                "15 Januari 2024",
+                R.drawable.ic_espresso,
+                true));
+        
+        // Setup adapter
+        PromoAdapter promoAdapter = new PromoAdapter(getContext(), promoItems);
+        promoViewPager.setAdapter(promoAdapter);
+        
+        // Setup transformasi halaman untuk efek carousel
+        CompositePageTransformer transformer = new CompositePageTransformer();
+        transformer.addTransformer(new MarginPageTransformer(8));
+        transformer.addTransformer((page, position) -> {
+            float v = 1 - Math.abs(position);
+            page.setScaleY(0.8f + v * 0.2f);
+        });
+        
+        promoViewPager.setPageTransformer(transformer);
+        
+        // Aktifkan offscreen page limit agar scroll lancar
+        promoViewPager.setOffscreenPageLimit(3);
+        
+        // Setup tab indicator
+        new TabLayoutMediator(promoTabLayout, promoViewPager,
+                (tab, position) -> {
+                    // Tidak perlu melakukan apa-apa di sini
+                }
+        ).attach();
+        
+        // Setup click listener untuk "Lihat Semua"
+        seeAllPromo.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "Melihat semua promo", Toast.LENGTH_SHORT).show();
+        });
     }
     
     private void initializeCategoryData() {
