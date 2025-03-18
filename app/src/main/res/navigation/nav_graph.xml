@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.swoopixapp.home"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/navigation_order"
+        android:name="com.example.swoopixapp.order"
+        android:label="Order" />
+
+    <fragment
+        android:id="@+id/navigation_voucher"
+        android:name="com.example.swoopixapp.voucher"
+        android:label="Voucher" />
+
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.example.swoopixapp.notification"
+        android:label="Notification" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.swoopixapp.profile"
+        android:label="Profile" />
+
+</navigation> 

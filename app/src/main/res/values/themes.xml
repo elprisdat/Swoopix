@@ -37,22 +37,18 @@
 
     <!-- Text Styles -->
     <style name="TextAppearance.Swoopix.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
-        <item name="fontFamily">@font/roboto</item>
         <item name="android:textSize">24sp</item>
     </style>
 
     <style name="TextAppearance.Swoopix.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
-        <item name="fontFamily">@font/roboto</item>
         <item name="android:textSize">18sp</item>
     </style>
 
     <style name="TextAppearance.Swoopix.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
-        <item name="fontFamily">@font/roboto</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <style name="TextAppearance.Swoopix.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
-        <item name="fontFamily">@font/roboto</item>
         <item name="android:textSize">14sp</item>
     </style>
 

@@ -179,12 +179,4 @@ Jika Anda ingin mendapatkan akses push ke repository:
    - Centang scope "repo"
    - Generate dan simpan token dengan aman
 
-## 📞 Kontak
 
-Jika ada pertanyaan atau kendala, silakan hubungi:
-- GitHub: [@elprisdat](https://github.com/elprisdat)
-- Email: ariiq3st@gmail.com
-
-## 📜 Lisensi
-
-[Sesuaikan dengan lisensi yang digunakan]
